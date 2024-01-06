@@ -1,0 +1,17 @@
+model:
+    user D
+    message: ref user
+
+
+route: 
+    login D
+    register D
+    dashboard: messages to the user
+
+routes: 
+    auth: /register, /login
+    app: /dashboard, /setting, 
+
+    url: path, subdomain??
+
+
