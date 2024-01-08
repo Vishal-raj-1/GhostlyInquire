@@ -3,6 +3,9 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import authRouter from "./routes/auth.js";
+import appRouter from "./routes/app.js";
+import AuthMiddleware from "./middlewares/authMiddleware.js";
+import { handlePostMessages } from "./controller/messages.js";
 
 dotenv.config();
 const app = express();
@@ -16,6 +19,9 @@ app.use(express.urlencoded({extended: false}));
 
 // Routes
 app.use("/auth", authRouter);
+app.use("/account", AuthMiddleware, appRouter);
+
+app.post("/:id", handlePostMessages);
 
 
-app.listen(3000, () => console.log("Connected to the server"))
+app.listen(3000, () => console.log("Connected to the server"));

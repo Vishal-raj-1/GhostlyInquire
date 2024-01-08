@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     },
     userImage: {
         type: String,
-    }
+    }, 
 })
 
 export default mongoose.model("user", userSchema);
