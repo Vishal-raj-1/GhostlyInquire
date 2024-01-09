@@ -6,6 +6,7 @@ import authRouter from "./routes/auth.js";
 import appRouter from "./routes/app.js";
 import AuthMiddleware from "./middlewares/authMiddleware.js";
 import { handlePostMessages } from "./controller/messages.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,10 @@ mongoose.connect(process.env.MONGO_URL).then(() => console.log("connnected to th
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(cors({
+  origin:"*",
+  credentials: true,
+}));
 
 // Routes
 app.use("/auth", authRouter);

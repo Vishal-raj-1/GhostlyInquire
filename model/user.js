@@ -8,12 +8,12 @@ const userSchema = new mongoose.Schema({
     userName: {
         type: String,
         required: true,
-        unique: true,
+        unique: [true, 'userName already exists']
     },
     email: {
         type: String,
         required: true,
-        unique: true,
+        unique: [true, 'email already exists']
     },
     salt: {
         type: String,
