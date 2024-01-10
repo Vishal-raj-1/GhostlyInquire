@@ -37,9 +37,16 @@ export const handleUserRegister = async (req, res) => {
     });
 
     const token = createToken(user._id);
-    res.status(201).json({ user, token, message: "Register Successfully" });
+    res
+      .status(201)
+      .json({
+        name: user.name,
+        userName: user.userName,
+        token,
+        message: "Register Successfully",
+      });
   } catch (error) {
-    res.status(400).json({error});
+    res.status(400).json({ error });
   }
 };
 
@@ -49,14 +56,19 @@ export const handleUserLogin = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     const isMatch = bcrypt.compareSync(password, user.password);
-    const token = createToken(user._id);
 
     if (isMatch) {
-      res.status(200).json({ user, token, message: "Login Successfully" });
+      const token = createToken(user._id);
+      res.status(200).json({
+        name: user.name,
+        userName: user.userName,
+        token,
+        message: "Login Successfully",
+      });
     } else {
       res.status(403).json({ error: "Wrong email or password" });
     }
   } catch (error) {
-    res.status(400).json({ error});
+    res.status(400).json({ error });
   }
 };
